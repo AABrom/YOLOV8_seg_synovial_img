@@ -1,4 +1,4 @@
-Часть данных Synovial tissues histology from patients with end-stage osteoarthritis, soft tissue and traumatic injuries of the knee преобразованы в YAML-формат для сегментации, поддерживаемый нейросетями группы YOLO. Обучение YOLOv8-seg.
+Часть данных Synovial tissues histology from patients with end-stage osteoarthritis, soft tissue and traumatic injuries of the knee преобразованы в YAML-формат для сегментации, поддерживаемый нейросетями группы YOLO. Обучение YOLOv8-seg на полученном наборе: достигнуты метрики Box: P = 0.656, R = 0.535, MaP50 = 0.57, Mask: P = 0.588, R = 0.464, MaP50 = 0.48
 ______________________________________________________________________________
 ### Структура данных
 Аннотации представлены в папках synovial_annots_json, txt_annots 
