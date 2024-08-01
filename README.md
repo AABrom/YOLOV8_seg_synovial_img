@@ -4,8 +4,10 @@ ______________________________________________________________________________
 ### О репозитории
 Аннотации в формате geojson представлены в папке synovial_annots_json, в папке yolo_v8 сформированный набор данных без файла конфигурации. Обученная модель доступна в формате PyTorch: vessel_seg_model.pt
 Создай локальную копию:
+```ruby
 git clone https://github.com/AABrom/YOLOV8_seg_synovial_img
 pip install -r requirements.txt
+```
 ______________________________________________________________________________
 ### Источник данных https://data.mendeley.com/datasets/cz3xt8mbpn/1
 Jamal, Juliana; Roebuck, Margaret ; Wood, Amanda; Santini, Alasdair; Bou-Gharios, George; Wong, Pooi-Fong (2022), “Synovial tissues histology from patients with end-stage osteoarthritis, soft tissue and traumatic injuries of the knee ”, Mendeley Data, V1, doi: 10.17632/cz3xt8mbpn.1
