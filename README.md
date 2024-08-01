@@ -1,28 +1,37 @@
-# YOLOv8-сегментация сосудов на гистологических изображениях препаратов синовиальной оболочки
-Часть данных Synovial tissues histology from patients with end-stage osteoarthritis, soft tissue and traumatic injuries of the knee преобразованы в формат для сегментации, поддерживаемый нейросетями группы YOLO. Обучение YOLOv8-seg на полученном наборе: достигнуты метрики Box: P = 0.656, R = 0.535, MaP50 = 0.57, Mask: P = 0.588, R = 0.464, MaP50 = 0.48
+# YOLOv8 blood vessel instance segmentation on synovial tissues histology images
+We used Synovial tissues histology from patients with end-stage osteoarthritis, soft tissue and traumatic injuries of the knee dataset. Scripts allow to create YAML-format dataset, to predict blood vessels area on synovial tissue histological images by Aperio CS2 Digital Pathology Scanner or identical.
+vessel_seg_model metrics: Box: P = 0.656, R = 0.535, MaP50 = 0.57, Mask: P = 0.588, R = 0.464, MaP50 = 0.48
 ______________________________________________________________________________
-### О репозитории
-Аннотации в формате geojson представлены в папке synovial_annots_json, в папке yolo_v8 сформированный набор данных без файла конфигурации. Обученная модель доступна в формате PyTorch: vessel_seg_model.pt
-Создай локальную копию:
+### Run
+1. Local clone:
 ```ruby
 git clone https://github.com/AABrom/YOLOV8_seg_synovial_img
 pip install -r requirements.txt
 ```
+2. To use our data: download synovial_annots_json, synovial_images folders. To create your own dataset:
+```
+os.mkdir("synovial_annots_json")
+os.mkdir("synovial_images")
+```
+Then download your json annotations and images to folders
 ______________________________________________________________________________
-### Источник данных https://data.mendeley.com/datasets/cz3xt8mbpn/1
+### [Dataset](https://data.mendeley.com/datasets/cz3xt8mbpn/1)
 Jamal, Juliana; Roebuck, Margaret ; Wood, Amanda; Santini, Alasdair; Bou-Gharios, George; Wong, Pooi-Fong (2022), “Synovial tissues histology from patients with end-stage osteoarthritis, soft tissue and traumatic injuries of the knee ”, Mendeley Data, V1, doi: 10.17632/cz3xt8mbpn.1
 ______________________________________________________________________________
-### Обзор набора данных
-Набор данных содержит гистологические изображения интраоперационного материала и биоптатов синовиальной оболочки от 33 пациентов. Все образцы окрашены гематоксилин-эозином. Каждое изображение разделено сеткой на несколько образцов, образцы  представлено в формате tiff. Данные пациентов представлены Liverpool University Hospitals NHS Foundation Trust, Liverpool. Подготовка препаратов проводилась в этой же клинике. Для создания цифровых 
-изображений использован Aperio CS2 Digital Pathology Scanner.
+### Dataset review
+Dataset contains 33 individual patient folders containing the H&E-stained synovial tissue section tiff images. All patients underwent knee surgery at the Liverpool University Hospitals NHS Foundation Trust, Liverpool. Histological microimages of each complete synovial tissue were captured at 20x and digitalised using an Aperio CS2 Digital Pathology Scanner.
 ______________________________________________________________________________
-### О формате YAML для YOLO
-Формат аннотаций набора данных, используемый для обучения моделей сегментации YOLO, выглядит следующим образом: каждое изображение в наборе данных имеет соответствующий текстовый файл с тем же именем, что и файл изображения, и расширением ".txt". Каждая строка в текстовом файле соответствует одному объекту на изображении. Строка представлена в виде: <class-index> <x1> <y1> <x2> <y2> ... <xn> <yn>, где <class-index> - это индекс класса для данного объекта, а <x1> <y1> <x2> <y2> ... <xn> <yn> - пограничные координаты маски сегментации объекта, нормализованные в диапазоне от 0 до 1. Координаты разделены пробелами. 
+### [Ultralytics YOLO format](https://docs.ultralytics.com/datasets/segment/)
+- One text file per image: Each image in the dataset has a corresponding text file with the same name as the image file and the ".txt" extension.
+- One row per object: Each row in the text file corresponds to one object instance in the image.
+- Object information per row: Each row contains the following information about the object instance:
+- Object class index: An integer representing the class of the object (e.g., 0 for person, 1 for car, etc.).
+- Object bounding coordinates: The bounding coordinates around the mask area, normalized to be between 0 and 1.
+```
+<class-index> <x1> <y1> <x2> <y2> ... <xn> <yn>
+```
 ______________________________________________________________________________
-### Аннотирование 
-Аннотирование изображений выполнено в программе QuPath-0.5.1. Для аннотации использованы изображения препаратов синовиальной оболочки масштабом 300 нм из набора данных Объединённого Ливерпульского траста Университетских больниц. Исключены полноразмерные изображения и изображения с сеткой. Разметка изображений производилась с применением элемента «Brush». Полученные таким образом аннотации представлены полигонами. Аннотации последовательно выгружены в формате GeoJson в виде отдельных файлов для каждого изображения с названием, идентичным изображению.
+### Annotations
+All images annotated by QuPath-0.5.1 using «Brush». We used 300μm area sections. Polygon annotations were exported in GeoJson format with each json file name same to related image name.
 ______________________________________________________________________________
-### Описание проекта
-С помощью написанных функций на языке Python удалены специальные символы, вспомогательная информация о типе объектов, формате аннотаций, применена нормализация координат масок по формулам: x = x/image_width, y = y/image_height, где image_width – ширина изображения, image_height – высота изображения, добавлены метки единственного класса, аннотации сохранены в отдельные текстовые файлы для каждого изображения в поддерживаемом формате YAML. Создан файл конфигурации, YOLOv8s-seg пакета ultralytics дообучена с применением аугментаций на полученном наборе. 
-______________________________________________________________________________
-### Автор: Анастасия Бромберг 
+### Author: Anastasia Bromberg 
