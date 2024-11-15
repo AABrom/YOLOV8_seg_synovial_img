@@ -8,12 +8,16 @@ ______________________________________________________________________________
 git clone https://github.com/AABrom/YOLOV8_seg_synovial_img
 pip install -r requirements.txt
 ```
-2. To use our data: download synovial_annots_json, synovial_images folders. To create your own dataset:
+2. To use our data: download synovial_annots_json, synovial_images folders.
+
+3. To create your own dataset:
+- First of all, you have to convert annotations to YOLO-supported format. Save your annotations from QuPath to GeoJson format, annotation file names similar to image names, for example: Image1.tif, Image1.json. Use [QuPath documentation](https://qupath.readthedocs.io/en/stable/docs/advanced/exporting_annotations.html). All your images and annotations should be in one folder. 
+- Download script GEOJSONTOYOLO.py. Create folder to save results. In Windows: run command line, change to the script directory. To run script choose your images and annotations folder as --path_to_folder and your results folder as --path_to_result_folder. For example:
+
+```ruby
+python GEOJSONTOYOLO.py --path_to_folder C:\Users\user\Desktop\folder --path_to_result_folder C:\Users\user\Desktop\txt_annots
 ```
-os.mkdir("synovial_annots_json")
-os.mkdir("synovial_images")
-```
-Then download your json annotations and images to folders
+If all done, your converted images are in result folder. 
 ______________________________________________________________________________
 ### [Dataset](https://data.mendeley.com/datasets/cz3xt8mbpn/1)
 Jamal, Juliana; Roebuck, Margaret ; Wood, Amanda; Santini, Alasdair; Bou-Gharios, George; Wong, Pooi-Fong (2022), “Synovial tissues histology from patients with end-stage osteoarthritis, soft tissue and traumatic injuries of the knee ”, Mendeley Data, V1, doi: 10.17632/cz3xt8mbpn.1
