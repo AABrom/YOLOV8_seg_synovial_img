@@ -43,7 +43,7 @@ def get_text_annotation(path_to_folder, path_to_result_folder):
                       str_a = ' '.join(map(str, coords_list))
                       f.write(str_a + "\n")
             except:
-                    print(f'Warning: No annotations named {annot_name} found. Empty annotation file created.\n Your annotations should have same names as images, for example: Image1.tif, Image1.json')
+                    print(f'Warning: No annotations in {annot_name} found. Empty annotation file created.\n Your annotations should have same names as images, for example: Image1.tif, Image1.json')
                     continue
   if img_counter:
     print(f'Conversion completed. {img_counter} images found.')
